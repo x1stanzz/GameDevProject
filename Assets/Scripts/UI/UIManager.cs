@@ -13,10 +13,16 @@ public class UIManager : MonoBehaviour
     [Header("Pause")]
     [SerializeField] private GameObject _pauseScreen;
 
+    [Header("Win Screen")]
+    [SerializeField] private GameObject _winScreen;
+    [SerializeField] private Movement _player;
+    public bool isWin { private get; set; }
+
     private void Awake()
     {
         _gameOverScreen.SetActive(false);
         _pauseScreen.SetActive(false);
+        _winScreen.SetActive(false);
     }
 
     private void Update()
@@ -27,7 +33,7 @@ public class UIManager : MonoBehaviour
                 PauseGame(false);
             else
                 PauseGame(true);
-        }
+        }      
     }
     #region GameOver
     public void GameOver()
@@ -38,6 +44,7 @@ public class UIManager : MonoBehaviour
 
     public void Restart()
     {
+        Time.timeScale = 1;
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
@@ -73,6 +80,17 @@ public class UIManager : MonoBehaviour
     public void ChangeMusicVolume()
     {
         AudioManager.instance.ChangeMusicVolume(0.1f);
+    }
+    #endregion
+
+    #region Win
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (_player != null)
+        {
+            _winScreen.SetActive(true);
+            Time.timeScale = 0;
+        }
     }
     #endregion
 }
