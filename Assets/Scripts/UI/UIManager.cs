@@ -29,11 +29,11 @@ public class UIManager : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if(_pauseScreen.activeInHierarchy)
+            if (_pauseScreen.activeInHierarchy)
                 PauseGame(false);
             else
                 PauseGame(true);
-        }      
+        }
     }
     #region GameOver
     public void GameOver()
@@ -56,9 +56,9 @@ public class UIManager : MonoBehaviour
     public void Quit()
     {
         //Application.Quit();
-        #if UNITY_EDITOR
+#if UNITY_EDITOR
         UnityEditor.EditorApplication.isPlaying = false;
-        #endif
+#endif
     }
     #endregion
     #region Pause
